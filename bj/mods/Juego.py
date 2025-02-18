@@ -29,7 +29,7 @@ class Juego:
                     if len(crupier.mano) == 0:
                         carta = deck.pop(0)
                         crupier.mano.append(carta)
-                    elif crupier.puntos() + carta[1] <= 21:
+                    elif crupier.puntos() + deck[0][1] <= 21:
                         carta = deck.pop(0)
                         crupier.mano.append(carta)
                     else:
@@ -39,12 +39,14 @@ class Juego:
             
             print("Crupier: ",crupier.mano)
             print("Tu: ",jugador.mano)
-
-            if jugador.puntos() > crupier.puntos() and jugador.puntos <= 21:
+            
+            if (jugador.puntos() > crupier.puntos() and jugador.puntos() <= 21) or jugador.puntos() == 21:
                 print(f"Has ganado {apuesta*2}")
                 jugador.cartera += apuesta*2
+                jugador.wins += 1
             else:
                 print("Gana la casa")
+                jugador.loses += 1
             
             jugador.mano = []
             crupier.mano = []
